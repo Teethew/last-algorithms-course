@@ -6,9 +6,9 @@ import (
 )
 
 func NewSinglyLinkedList() LinkedList[*singly.Node] {
-	return singly.NewSinglyLinkedList()
+	return singly.NewLinkedList()
 }
 
 func NewDoublyLinkedList() LinkedList[*doubly.Node] {
-	return doubly.NewDoublyLinkedList()
+	return doubly.NewLinkedList()
 }

@@ -8,7 +8,7 @@ type SinglyLinkedList struct {
 	length int
 }
 
-func NewSinglyLinkedList() *SinglyLinkedList {
+func NewLinkedList() *SinglyLinkedList {
 	return &SinglyLinkedList{
 		head:   nil,
 		tail:   nil,
@@ -19,17 +19,17 @@ func NewSinglyLinkedList() *SinglyLinkedList {
 // List Interface implementation methods
 
 func (l *SinglyLinkedList) Add(value int) {
-	node := Node{Val: value, next: nil}
+	node := &Node{Val: value, next: nil}
 
 	if l.head == nil {
-		l.head = &node
-		l.tail = &node
+		l.head = node
+		l.tail = node
 		l.length++
 		return
 	}
 
-	l.tail.next = &node
-	l.tail = &node
+	l.tail.next = node
+	l.tail = node
 	l.length++
 }
 
@@ -80,6 +80,7 @@ func (l *SinglyLinkedList) DeleteAt(index int) error {
 	}
 
 	prevNode.next = prevNode.next.next
+	l.length--
 
 	return nil
 }
@@ -95,6 +96,7 @@ func (l *SinglyLinkedList) AddAt(index, value int) error {
 	newNode := &Node{Val: value, next: previous.next}
 
 	previous.next = newNode
+	l.length++
 
 	return nil
 }
@@ -123,26 +125,22 @@ func (l *SinglyLinkedList) ToString() (str string) {
 	return
 }
 
-// SinglyLinkedList methods
+// Linked List Interface implementation methods
 
-// Adds a new node with the value specified at the start of the SinglyLinkedList
 func (l *SinglyLinkedList) Prepend(value int) {
 	node := Node{Val: value, next: l.head}
 	l.head = &node
 	l.length++
 }
 
-// Returns the head (the first node) of the SinglyLinkedList
 func (l *SinglyLinkedList) Head() *Node {
 	return l.head
 }
 
-// Returns the tail (the last node) of the SinglyLinkedList
 func (l *SinglyLinkedList) Tail() *Node {
 	return l.tail
 }
 
-// Removes the specified node of the SinglyLinkedList
 func (l *SinglyLinkedList) Remove(node *Node) error {
 	var prev *Node
 
@@ -163,6 +161,7 @@ func (l *SinglyLinkedList) Remove(node *Node) error {
 	}
 
 	prev.next = prev.next.next
+	l.length--
 
 	return nil
 }

@@ -8,7 +8,7 @@ type DoublyLinkedList struct {
 	length int
 }
 
-func NewDoublyLinkedList() *DoublyLinkedList {
+func NewLinkedList() *DoublyLinkedList {
 	return &DoublyLinkedList{
 		head:   nil,
 		tail:   nil,
@@ -16,25 +16,29 @@ func NewDoublyLinkedList() *DoublyLinkedList {
 	}
 }
 
-// TODO: implement real DoublyLinkedList methods
 // List Interface implementation methods
 
 func (l *DoublyLinkedList) Add(value int) {
-	node := Node{Val: value, next: nil}
+	node := &Node{
+		Val:  value,
+		next: nil,
+		prev: nil,
+	}
 
 	if l.head == nil {
-		l.head = &node
-		l.tail = &node
+		l.head = node
+		l.tail = node
 		l.length++
 		return
 	}
 
-	l.tail.next = &node
-	l.tail = &node
+	node.prev = l.tail
+	l.tail.next = node
+	l.tail = node
 	l.length++
 }
 
-func (l *DoublyLinkedList) Get(index int) (value int, err error) {
+func (l *DoublyLinkedList) Get(index int) (int, error) {
 
 	node, err := l.getNode(index)
 
@@ -62,6 +66,7 @@ func (l *DoublyLinkedList) DeleteAt(index int) error {
 
 	if index == 0 {
 		if l.length > 0 {
+			l.head.next.prev = nil
 			l.head = l.head.next
 			l.length--
 			return nil
@@ -74,28 +79,32 @@ func (l *DoublyLinkedList) DeleteAt(index int) error {
 		return outOfBoundsError(index)
 	}
 
-	prevNode, err := l.getNode(index - 1)
+	node, err := l.getNode(index)
 
 	if err != nil {
 		return err
 	}
 
-	prevNode.next = prevNode.next.next
+	node.prev.next = node.next
+	node.next.prev = node.prev
+	l.length--
 
 	return nil
 }
 
 func (l *DoublyLinkedList) AddAt(index, value int) error {
 
-	previous, err := l.getNode(index - 1)
+	node, err := l.getNode(index)
 
 	if err != nil {
 		return err
 	}
 
-	newNode := &Node{Val: value, next: previous.next}
+	newNode := &Node{Val: value, next: node, prev: node.prev}
 
-	previous.next = newNode
+	node.prev.next = newNode
+	node.next.prev = newNode
+	l.length++
 
 	return nil
 }
@@ -124,29 +133,33 @@ func (l *DoublyLinkedList) ToString() (str string) {
 	return
 }
 
-// Adds a new node with the value specified at the start of the DoublyLinkedList
+// Linked List Interface implementation methods
+
 func (l *DoublyLinkedList) Prepend(value int) {
-	node := Node{Val: value, next: l.head}
+	node := Node{
+		Val:  value,
+		next: l.head,
+		prev: nil,
+	}
 	l.head = &node
 	l.length++
 }
 
-// Returns the head (the first node) of the DoublyLinkedList
 func (l *DoublyLinkedList) Head() *Node {
 	return l.head
 }
 
-// Returns the tail (the last node) of the DoublyLinkedList
 func (l *DoublyLinkedList) Tail() *Node {
 	return l.tail
 }
 
-// Removes the specified node of the DoublyLinkedList
 func (l *DoublyLinkedList) Remove(node *Node) error {
 	var prev *Node
 
 	if node == l.head {
 		l.head = l.head.next
+		l.head.prev = nil
+		l.length--
 		return nil
 	}
 
@@ -155,13 +168,15 @@ func (l *DoublyLinkedList) Remove(node *Node) error {
 			return fmt.Errorf("node not found")
 		}
 
-		if &n.next == &node {
-			prev = n
+		if &n == &node {
+			prev = n.prev
 			break
 		}
 	}
 
-	prev.next = prev.next.next
+	node.next.prev = prev
+	prev.next = node.next
+	l.length--
 
 	return nil
 }
@@ -183,4 +198,3 @@ func (l *DoublyLinkedList) getNode(index int) (*Node, error) {
 func outOfBoundsError(index int) error {
 	return fmt.Errorf("index %d out of bounds", index)
 }
-
