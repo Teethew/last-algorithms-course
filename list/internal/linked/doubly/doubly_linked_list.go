@@ -85,6 +85,20 @@ func (l *DoublyLinkedList) DeleteAt(index int) error {
 		return err
 	}
 
+	if node == l.head {
+		node.next.prev = nil
+		l.head = node.next
+		l.length--
+		return nil
+	}
+
+	if node == l.tail {
+		node.prev.next = nil
+		l.tail = node.prev
+		l.length--
+		return nil
+	}
+
 	node.prev.next = node.next
 	node.next.prev = node.prev
 	l.length--
@@ -93,6 +107,11 @@ func (l *DoublyLinkedList) DeleteAt(index int) error {
 }
 
 func (l *DoublyLinkedList) AddAt(index, value int) error {
+
+	if index == 0 {
+		l.Prepend(value)
+		return nil
+	}
 
 	node, err := l.getNode(index)
 
@@ -103,7 +122,7 @@ func (l *DoublyLinkedList) AddAt(index, value int) error {
 	newNode := &Node{Val: value, next: node, prev: node.prev}
 
 	node.prev.next = newNode
-	node.next.prev = newNode
+	node.prev = newNode
 	l.length++
 
 	return nil
@@ -141,6 +160,7 @@ func (l *DoublyLinkedList) Prepend(value int) {
 		next: l.head,
 		prev: nil,
 	}
+	l.head.prev = &node
 	l.head = &node
 	l.length++
 }
