@@ -1,0 +1,10 @@
+package singly
+
+type Type interface {
+	int | string | struct{}
+}
+
+type Node[T Type] struct {
+	Val  T
+	next *Node[T]
+}

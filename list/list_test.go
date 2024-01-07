@@ -3,22 +3,22 @@ package list
 import (
 	"testing"
 
-	"github.com/Teethew/last-algorithms-course/list/internal/linked/doubly"
-	"github.com/Teethew/last-algorithms-course/list/internal/linked/singly"
+	"github.com/Teethew/last-algorithms-course/list/linked/doubly"
+	"github.com/Teethew/last-algorithms-course/list/linked/singly"
 )
 
-var singlyLinked LinkedList[*singly.Node]
-var doublyLinked LinkedList[*doubly.Node]
+var singlyLinkedList LinkedList[int, *singly.Node[int]]
+var doublyLinkedList LinkedList[int, *doubly.Node[int]]
 
 func setup() {
-	singlyLinked = NewSinglyLinkedList()
-	doublyLinked = NewDoublyLinkedList()
+	singlyLinkedList = NewSinglyLinkedList[int]()
+	doublyLinkedList = NewDoublyLinkedList[int]()
 }
 
 func TestSinglyLinkedList(t *testing.T) {
 	setup()
 
-	var list List = singlyLinked
+	var list List[int] = singlyLinkedList
 
 	list.Add(3)
 	list.Add(6)
@@ -28,7 +28,7 @@ func TestSinglyLinkedList(t *testing.T) {
 		t.Fatal()
 	}
 
-	singlyLinked.Prepend(0)
+	singlyLinkedList.Prepend(0)
 
 	if list.ToString() != "[ 0  3  6  9 ]" {
 		t.Fatal()
@@ -44,12 +44,12 @@ func TestSinglyLinkedList(t *testing.T) {
 		t.Fatal()
 	}
 
-	err = list.Update(3, 12)
+	err = list.Set(3, 12)
 
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
-	
+
 	if list.ToString() != "[ 0  3  6  12 ]" {
 		t.Fatal()
 	}
@@ -84,7 +84,7 @@ func TestSinglyLinkedList(t *testing.T) {
 		t.Fatal()
 	}
 
-	err = singlyLinked.Remove(singlyLinked.Head())
+	err = singlyLinkedList.Remove(singlyLinkedList.Head())
 
 	if err != nil {
 		t.Fatalf(err.Error())
@@ -98,7 +98,7 @@ func TestSinglyLinkedList(t *testing.T) {
 func TestDoublyLinkedList(t *testing.T) {
 	setup()
 
-	var list List = doublyLinked
+	var list List[int] = doublyLinkedList
 
 	list.Add(3)
 	list.Add(6)
@@ -108,7 +108,7 @@ func TestDoublyLinkedList(t *testing.T) {
 		t.Fatal()
 	}
 
-	doublyLinked.Prepend(0)
+	doublyLinkedList.Prepend(0)
 
 	if list.ToString() != "[ 0  3  6  9 ]" {
 		t.Fatal()
@@ -124,12 +124,12 @@ func TestDoublyLinkedList(t *testing.T) {
 		t.Fatal()
 	}
 
-	err = list.Update(3, 12)
+	err = list.Set(3, 12)
 
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
-	
+
 	if list.ToString() != "[ 0  3  6  12 ]" {
 		t.Fatal()
 	}
@@ -164,7 +164,7 @@ func TestDoublyLinkedList(t *testing.T) {
 		t.Fatal()
 	}
 
-	err = doublyLinked.Remove(doublyLinked.Head())
+	err = doublyLinkedList.Remove(doublyLinkedList.Head())
 
 	if err != nil {
 		t.Fatalf(err.Error())

@@ -2,14 +2,14 @@ package doubly
 
 import "fmt"
 
-type DoublyLinkedList struct {
-	head   *Node
-	tail   *Node
+type DoublyLinkedList[T Type] struct {
+	head   *Node[T]
+	tail   *Node[T]
 	length int
 }
 
-func NewLinkedList() *DoublyLinkedList {
-	return &DoublyLinkedList{
+func NewLinkedList[T Type]() *DoublyLinkedList[T] {
+	return &DoublyLinkedList[T]{
 		head:   nil,
 		tail:   nil,
 		length: 0,
@@ -18,8 +18,8 @@ func NewLinkedList() *DoublyLinkedList {
 
 // List Interface implementation methods
 
-func (l *DoublyLinkedList) Add(value int) {
-	node := &Node{
+func (l *DoublyLinkedList[T]) Add(value T) {
+	node := &Node[T]{
 		Val:  value,
 		next: nil,
 		prev: nil,
@@ -38,18 +38,18 @@ func (l *DoublyLinkedList) Add(value int) {
 	l.length++
 }
 
-func (l *DoublyLinkedList) Get(index int) (int, error) {
+func (l *DoublyLinkedList[T]) Get(index int) (T, error) {
 
 	node, err := l.getNode(index)
 
 	if err != nil {
-		return 0, err
+		return node.Val, err
 	}
 
 	return node.Val, nil
 }
 
-func (l *DoublyLinkedList) Update(index, value int) error {
+func (l *DoublyLinkedList[T]) Set(index int, value T) error {
 
 	node, err := l.getNode(index)
 
@@ -62,7 +62,7 @@ func (l *DoublyLinkedList) Update(index, value int) error {
 	return nil
 }
 
-func (l *DoublyLinkedList) DeleteAt(index int) error {
+func (l *DoublyLinkedList[T]) DeleteAt(index int) error {
 
 	if index == 0 {
 		if l.length > 0 {
@@ -106,7 +106,7 @@ func (l *DoublyLinkedList) DeleteAt(index int) error {
 	return nil
 }
 
-func (l *DoublyLinkedList) AddAt(index, value int) error {
+func (l *DoublyLinkedList[T]) AddAt(index int, value T) error {
 
 	if index == 0 {
 		l.Prepend(value)
@@ -119,7 +119,7 @@ func (l *DoublyLinkedList) AddAt(index, value int) error {
 		return err
 	}
 
-	newNode := &Node{Val: value, next: node, prev: node.prev}
+	newNode := &Node[T]{Val: value, next: node, prev: node.prev}
 
 	node.prev.next = newNode
 	node.prev = newNode
@@ -128,11 +128,11 @@ func (l *DoublyLinkedList) AddAt(index, value int) error {
 	return nil
 }
 
-func (l *DoublyLinkedList) Length() int {
+func (l *DoublyLinkedList[T]) Length() int {
 	return l.length
 }
 
-func (l *DoublyLinkedList) ToString() (str string) {
+func (l *DoublyLinkedList[T]) ToString() (str string) {
 	str = "["
 
 	if l.length == 0 {
@@ -141,7 +141,7 @@ func (l *DoublyLinkedList) ToString() (str string) {
 	}
 
 	for n := l.head; ; n = n.next {
-		str += fmt.Sprintf(" %d ", n.Val)
+		str += fmt.Sprintf(" %v ", n.Val)
 		if n.next == nil {
 			break
 		}
@@ -154,8 +154,8 @@ func (l *DoublyLinkedList) ToString() (str string) {
 
 // Linked List Interface implementation methods
 
-func (l *DoublyLinkedList) Prepend(value int) {
-	node := Node{
+func (l *DoublyLinkedList[T]) Prepend(value T) {
+	node := Node[T]{
 		Val:  value,
 		next: l.head,
 		prev: nil,
@@ -165,16 +165,16 @@ func (l *DoublyLinkedList) Prepend(value int) {
 	l.length++
 }
 
-func (l *DoublyLinkedList) Head() *Node {
+func (l *DoublyLinkedList[T]) Head() *Node[T] {
 	return l.head
 }
 
-func (l *DoublyLinkedList) Tail() *Node {
+func (l *DoublyLinkedList[T]) Tail() *Node[T] {
 	return l.tail
 }
 
-func (l *DoublyLinkedList) Remove(node *Node) error {
-	var prev *Node
+func (l *DoublyLinkedList[T]) Remove(node *Node[T]) error {
+	var prev *Node[T]
 
 	if node == l.head {
 		l.head = l.head.next
@@ -203,7 +203,7 @@ func (l *DoublyLinkedList) Remove(node *Node) error {
 
 // Private methods
 
-func (l *DoublyLinkedList) getNode(index int) (*Node, error) {
+func (l *DoublyLinkedList[T]) getNode(index int) (*Node[T], error) {
 	if index < l.length {
 		for i, n := 0, l.head; i < l.length; i, n = i+1, n.next {
 			if i == index {
@@ -212,7 +212,7 @@ func (l *DoublyLinkedList) getNode(index int) (*Node, error) {
 		}
 	}
 
-	return nil, outOfBoundsError(index)
+	return &Node[T]{}, outOfBoundsError(index)
 }
 
 func outOfBoundsError(index int) error {
