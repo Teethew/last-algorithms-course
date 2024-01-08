@@ -32,3 +32,7 @@ func (s *LinkedStack[T]) Peek() T {
 func (s *LinkedStack[T]) ToString() string {
 	return s.list.ToString()
 }
+
+func (s *LinkedStack[T]) Length() int {
+	return s.list.Length()
+}

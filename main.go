@@ -1,31 +1,61 @@
 package main
 
 import (
+	"container/list"
 	"fmt"
-
-	"github.com/Teethew/last-algorithms-course/list"
+	"slices"
+	"strconv"
 )
 
 func main() {
-	arr := list.NewArrayList[int](2)
+	examples := make(map[int][]string)
 
-	fmt.Println(arr.ToString()) // []
+	examples[9] = []string{"2", "1", "+", "3", "*"}
+	examples[6] = []string{"4", "13", "5", "/", "+"}
+	examples[22] = []string{"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"}
 
-	arr.Add(1)
-	arr.Add(2)
-	arr.Add(3)
+	for result, expression := range examples {
+		fmt.Printf("result: %v | evalRPN(): %v\n", result, evalRPN(expression))
+	}
+}
 
-	fmt.Println(arr.ToString()) // [ 1  2  3 ]
+func evalRPN(tokens []string) int {
 
-	arr.AddAt(2, 5)
+	stack := list.New()
 
-	fmt.Println(arr.ToString()) // [ 1  2  5  3 ]
+	for _, token := range tokens {
+		if !isOperation(token) {
+			stack.PushFront(token)
+			continue
+		}
 
-	arr.DeleteAt(1)
+		operand1, _ := strconv.Atoi(stack.Front().Value.(string))
 
-	fmt.Println(arr.ToString()) // [ 1  5  3 ]
+		operand2, _ := strconv.Atoi(stack.Front().Next().Value.(string))
 
-	arr.Set(2, 7)
+		var result int
 
-	fmt.Println(arr.ToString()) // [ 1  5  7 ]
+		switch token {
+		case "+":
+			result = operand1 + operand2
+		case "-":
+			result = operand1 - operand2
+		case "/":
+			result = operand1 / operand2
+		case "*":
+			result = operand1 * operand2
+		}
+
+		stack.Remove(stack.Front())
+		stack.Front().Value = fmt.Sprint(result)
+	}
+
+	result, _ := strconv.Atoi(stack.Front().Value.(string))
+
+	return result
+}
+
+func isOperation(s string) bool {
+	operations := []string{"/", "+", "*", "-"}
+	return slices.Contains[[]string, string](operations, s)
 }

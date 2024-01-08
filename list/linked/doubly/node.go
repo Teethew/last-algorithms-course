@@ -1,7 +1,7 @@
 package doubly
 
 type Type interface {
-	int | string | struct{}
+	any
 }
 
 type Node[T Type] struct {

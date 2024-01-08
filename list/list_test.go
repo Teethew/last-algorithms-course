@@ -174,3 +174,37 @@ func TestDoublyLinkedList(t *testing.T) {
 		t.Fatal()
 	}
 }
+
+func TestArrayList(t *testing.T) {
+	arr := NewArrayList[int](2)
+
+	if arr.ToString() != "[]" {
+		t.Fatal()
+	}
+
+	arr.Add(1)
+	arr.Add(2)
+	arr.Add(3)
+
+	if arr.ToString() != "[ 1  2  3 ]"  {
+		t.Fatal()
+	}
+
+	arr.AddAt(2, 5)
+
+	if arr.ToString() != "[ 1  2  5  3 ]" {
+		t.Fatal()
+	}
+
+	arr.DeleteAt(1)
+
+	if arr.ToString() != "[ 1  5  3 ]" {
+		t.Fatal()
+	}
+
+	arr.Set(2, 7)
+
+	if arr.ToString() != "[ 1  5  7 ]" {
+		t.Fatal()
+	}
+}
