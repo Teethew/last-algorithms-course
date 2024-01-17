@@ -10,6 +10,7 @@ type Stack[T list.Type] interface {
 	Pop() T
 	Peek() T
 	ToString() string
+	Length() int
 }
 
 func NewLinkedStack[T list.Type]() Stack[T] {

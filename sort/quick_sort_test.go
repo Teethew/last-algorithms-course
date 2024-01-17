@@ -5,13 +5,13 @@ import (
 	"testing"
 )
 
-func TestBubbleSort(t *testing.T) {
+func TestQuickSort(t *testing.T) {
 	input := BigExample
 	expected := make([]int, len(input))
 	_ = copy(expected, input)
 	slices.Sort(expected)
 
-	BubbleSort(input)
+	QuickSort(input)
 
 	result := input
 
