@@ -186,7 +186,7 @@ func TestArrayList(t *testing.T) {
 	arr.Add(2)
 	arr.Add(3)
 
-	if arr.ToString() != "[ 1  2  3 ]"  {
+	if arr.ToString() != "[ 1  2  3 ]" {
 		t.Fatal()
 	}
 

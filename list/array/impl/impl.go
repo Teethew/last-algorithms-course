@@ -115,12 +115,12 @@ func (a *ArrayList[T]) ToString() (str string) {
 
 	if a.length == 0 {
 		str += "]"
-// 		str = fmt.Sprintf(
-// 			`{
-//   length: %d
-//   values: %v
-//   capacity: %d
-// }`, a.length, str, a.capacity)
+		// 		str = fmt.Sprintf(
+		// 			`{
+		//   length: %d
+		//   values: %v
+		//   capacity: %d
+		// }`, a.length, str, a.capacity)
 		return
 	}
 
@@ -130,12 +130,12 @@ func (a *ArrayList[T]) ToString() (str string) {
 
 	str += "]"
 
-// 	str = fmt.Sprintf(
-// 		`{
-//   length: %d
-//   values: %v
-//   capacity: %d
-// }`, a.length, str, a.capacity)
+	// 	str = fmt.Sprintf(
+	// 		`{
+	//   length: %d
+	//   values: %v
+	//   capacity: %d
+	// }`, a.length, str, a.capacity)
 
 	return
 }

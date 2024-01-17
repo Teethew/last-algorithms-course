@@ -113,6 +113,11 @@ func (l *DoublyLinkedList[T]) AddAt(index int, value T) error {
 		return nil
 	}
 
+	if index == l.length {
+		l.Add(value)
+		return nil
+	}
+
 	node, err := l.getNode(index)
 
 	if err != nil {
