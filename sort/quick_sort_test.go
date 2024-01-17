@@ -11,7 +11,7 @@ func TestQuickSort(t *testing.T) {
 	_ = copy(expected, input)
 	slices.Sort(expected)
 
-	BubbleSort(input)
+	QuickSort(input)
 
 	result := input
 
