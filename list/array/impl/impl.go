@@ -3,7 +3,7 @@ package impl
 import "fmt"
 
 type Type interface {
-	any
+	comparable
 }
 
 type ArrayList[T Type] struct {
@@ -138,6 +138,12 @@ func (a *ArrayList[T]) ToString() (str string) {
 	// }`, a.length, str, a.capacity)
 
 	return
+}
+
+func (a *ArrayList[T]) ToArray() []T {
+	slice := make([]T, a.length)
+	copy(slice, a.array)
+	return slice
 }
 
 func (a *ArrayList[T]) doubleCapacity() []T {

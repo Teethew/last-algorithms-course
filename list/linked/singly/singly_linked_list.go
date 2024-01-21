@@ -125,6 +125,14 @@ func (l *SinglyLinkedList[T]) ToString() (str string) {
 	return
 }
 
+func (l *SinglyLinkedList[T]) ToArray() []T {
+	slice := make([]T, l.length)
+	for n := l.head; n != nil; n = n.next {
+		slice = append(slice, n.Val)
+	}
+	return slice
+}
+
 // Linked List Interface implementation methods
 
 func (l *SinglyLinkedList[T]) Prepend(value T) {

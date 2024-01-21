@@ -7,9 +7,10 @@ import (
 
 type Queue[T list.Type] interface {
 	Enqueue(item T)
-	Deque() T
+	Dequeue() T
 	Peek() T
 	ToString() string
+	Length() int
 }
 
 func NewQueue[T list.Type]() Queue[T] {

@@ -19,8 +19,13 @@ func (q *QueueImpl[T]) Enqueue(item T) {
 	q.list.Add(item)
 }
 
-func (q *QueueImpl[T]) Deque() T {
+func (q *QueueImpl[T]) Dequeue() (item T) {
 	head := q.list.Head()
+
+	if head == nil {
+		return item
+	}
+
 	result := head.Val
 	q.list.Remove(head)
 	return result
@@ -28,6 +33,10 @@ func (q *QueueImpl[T]) Deque() T {
 
 func (q *QueueImpl[T]) Peek() T {
 	return q.list.Head().Val
+}
+
+func (q *QueueImpl[T]) Length() int {
+	return q.list.Length()
 }
 
 func (q *QueueImpl[T]) ToString() string {

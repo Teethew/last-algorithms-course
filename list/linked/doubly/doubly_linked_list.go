@@ -157,6 +157,14 @@ func (l *DoublyLinkedList[T]) ToString() (str string) {
 	return
 }
 
+func (l *DoublyLinkedList[T]) ToArray() []T {
+	slice := make([]T, l.length)
+	for n := l.head; n != nil; n = n.next {
+		slice = append(slice, n.Val)
+	}
+	return slice
+}
+
 // Linked List Interface implementation methods
 
 func (l *DoublyLinkedList[T]) Prepend(value T) {

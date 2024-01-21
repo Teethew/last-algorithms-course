@@ -6,7 +6,7 @@ import (
 )
 
 type Type interface {
-	any
+	comparable
 }
 
 type Node[T Type] interface {

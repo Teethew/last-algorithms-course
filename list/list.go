@@ -21,4 +21,7 @@ type List[T Type] interface {
 
 	// Returns a string representation of the list
 	ToString() string
+
+	// Returns an slice representation of the list
+	ToArray() []T
 }

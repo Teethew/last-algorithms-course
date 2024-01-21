@@ -23,7 +23,7 @@ func TestQueue(t *testing.T) {
 		t.Fatal()
 	}
 
-	_ = queue.Deque()
+	_ = queue.Dequeue()
 
 	if queue.ToString() != "[ jefferson ]" {
 		t.Fatal()

@@ -1,7 +1,7 @@
 package doubly
 
 type Type interface {
-	any
+	comparable
 }
 
 type Node[T Type] struct {
