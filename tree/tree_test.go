@@ -117,3 +117,35 @@ func TestBST(t *testing.T) {
 		t.Error("invalid BST considered valid")
 	}
 }
+
+func TestMinHeap(t *testing.T) {
+	h := NewMinHeap()
+	h.Insert(7)
+	h.Insert(4)
+	h.Insert(3)
+	h.Insert(1)
+
+	if h.Length() != 4 {
+		t.Errorf("expected length to be 4, instead got: %d", h.Length())
+	}
+
+	if expected := []int{1, 3, 4, 7}; slices.Compare[[]int, int](h.ToArray(), expected) != 0 {
+		t.Errorf("expected %v, instead got %v", expected, h.ToArray())
+	}
+
+	if value, err := h.Pop(); err != nil || value != 1 {
+		t.Errorf("expected to pop 1 without errors, instead got \nerr: %v\nvalue: %v", err, value)
+	}
+
+	if h.GetMin() != 3 {
+		t.Errorf("expected GetMin to return 3, instead returned %d", h.GetMin())
+	}
+
+	h.Pop()
+	h.Pop()
+	h.Pop()
+
+	if _, err := h.Pop(); err == nil {
+		t.Errorf("expected error on popping from empty heap, instead got nil")
+	}
+}

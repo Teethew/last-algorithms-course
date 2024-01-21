@@ -1,7 +1,7 @@
 package tree
 
 type TreeNode[T comparable] struct {
-	Val  T
+	Val      T
 	Children []*TreeNode[T]
 }
 
