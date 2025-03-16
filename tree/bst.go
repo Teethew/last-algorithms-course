@@ -58,7 +58,7 @@ func insert(node *BinaryTreeNode[int], value int) {
 
 func (b *BST) IsValid() bool {
 	slice := b.InOrder()
-	return slices.IsSorted[[]int, int](slice)
+	return slices.IsSorted(slice)
 }
 
 func (b *BST) Find(value int) bool {

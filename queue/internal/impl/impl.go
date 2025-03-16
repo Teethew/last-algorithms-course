@@ -39,6 +39,6 @@ func (q *QueueImpl[T]) Length() int {
 	return q.list.Length()
 }
 
-func (q *QueueImpl[T]) ToString() string {
-	return q.list.ToString()
+func (q *QueueImpl[T]) String() string {
+	return q.list.String()
 }

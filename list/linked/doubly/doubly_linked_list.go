@@ -137,7 +137,7 @@ func (l *DoublyLinkedList[T]) Length() int {
 	return l.length
 }
 
-func (l *DoublyLinkedList[T]) ToString() (str string) {
+func (l *DoublyLinkedList[T]) String() (str string) {
 	str = "["
 
 	if l.length == 0 {

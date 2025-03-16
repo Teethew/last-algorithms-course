@@ -20,7 +20,7 @@ type List[T Type] interface {
 	Length() int
 
 	// Returns a string representation of the list
-	ToString() string
+	String() string
 
 	// Returns an slice representation of the list
 	ToArray() []T

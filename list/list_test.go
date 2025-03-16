@@ -24,13 +24,13 @@ func TestSinglyLinkedList(t *testing.T) {
 	list.Add(6)
 	list.Add(9)
 
-	if list.ToString() != "[ 3  6  9 ]" {
+	if list.String() != "[ 3  6  9 ]" {
 		t.Fatal()
 	}
 
 	singlyLinkedList.Prepend(0)
 
-	if list.ToString() != "[ 0  3  6  9 ]" {
+	if list.String() != "[ 0  3  6  9 ]" {
 		t.Fatal()
 	}
 
@@ -50,7 +50,7 @@ func TestSinglyLinkedList(t *testing.T) {
 		t.Fatalf(err.Error())
 	}
 
-	if list.ToString() != "[ 0  3  6  12 ]" {
+	if list.String() != "[ 0  3  6  12 ]" {
 		t.Fatal()
 	}
 
@@ -60,7 +60,7 @@ func TestSinglyLinkedList(t *testing.T) {
 		t.Fatalf(err.Error())
 	}
 
-	if list.ToString() != "[ 0  3  6 ]" {
+	if list.String() != "[ 0  3  6 ]" {
 		t.Fatal()
 	}
 
@@ -70,7 +70,7 @@ func TestSinglyLinkedList(t *testing.T) {
 		t.Fatalf(err.Error())
 	}
 
-	if list.ToString() != "[ 0  6 ]" {
+	if list.String() != "[ 0  6 ]" {
 		t.Fatal()
 	}
 
@@ -80,7 +80,7 @@ func TestSinglyLinkedList(t *testing.T) {
 		t.Fatalf(err.Error())
 	}
 
-	if list.ToString() != "[ 0  3  6 ]" {
+	if list.String() != "[ 0  3  6 ]" {
 		t.Fatal()
 	}
 
@@ -90,7 +90,7 @@ func TestSinglyLinkedList(t *testing.T) {
 		t.Fatalf(err.Error())
 	}
 
-	if list.ToString() != "[ 3  6 ]" {
+	if list.String() != "[ 3  6 ]" {
 		t.Fatal()
 	}
 }
@@ -104,13 +104,13 @@ func TestDoublyLinkedList(t *testing.T) {
 	list.Add(6)
 	list.Add(9)
 
-	if list.ToString() != "[ 3  6  9 ]" {
+	if list.String() != "[ 3  6  9 ]" {
 		t.Fatal()
 	}
 
 	doublyLinkedList.Prepend(0)
 
-	if list.ToString() != "[ 0  3  6  9 ]" {
+	if list.String() != "[ 0  3  6  9 ]" {
 		t.Fatal()
 	}
 
@@ -130,7 +130,7 @@ func TestDoublyLinkedList(t *testing.T) {
 		t.Fatalf(err.Error())
 	}
 
-	if list.ToString() != "[ 0  3  6  12 ]" {
+	if list.String() != "[ 0  3  6  12 ]" {
 		t.Fatal()
 	}
 
@@ -140,7 +140,7 @@ func TestDoublyLinkedList(t *testing.T) {
 		t.Fatalf(err.Error())
 	}
 
-	if list.ToString() != "[ 0  3  6 ]" {
+	if list.String() != "[ 0  3  6 ]" {
 		t.Fatal()
 	}
 
@@ -150,7 +150,7 @@ func TestDoublyLinkedList(t *testing.T) {
 		t.Fatalf(err.Error())
 	}
 
-	if list.ToString() != "[ 0  6 ]" {
+	if list.String() != "[ 0  6 ]" {
 		t.Fatal()
 	}
 
@@ -160,7 +160,7 @@ func TestDoublyLinkedList(t *testing.T) {
 		t.Fatalf(err.Error())
 	}
 
-	if list.ToString() != "[ 0  3  6 ]" {
+	if list.String() != "[ 0  3  6 ]" {
 		t.Fatal()
 	}
 
@@ -170,7 +170,7 @@ func TestDoublyLinkedList(t *testing.T) {
 		t.Fatalf(err.Error())
 	}
 
-	if list.ToString() != "[ 3  6 ]" {
+	if list.String() != "[ 3  6 ]" {
 		t.Fatal()
 	}
 }
@@ -178,7 +178,7 @@ func TestDoublyLinkedList(t *testing.T) {
 func TestArrayList(t *testing.T) {
 	arr := NewArrayList[int](2)
 
-	if arr.ToString() != "[]" {
+	if arr.String() != "[]" {
 		t.Fatal()
 	}
 
@@ -186,25 +186,25 @@ func TestArrayList(t *testing.T) {
 	arr.Add(2)
 	arr.Add(3)
 
-	if arr.ToString() != "[ 1  2  3 ]" {
+	if arr.String() != "[ 1  2  3 ]" {
 		t.Fatal()
 	}
 
 	arr.AddAt(2, 5)
 
-	if arr.ToString() != "[ 1  2  5  3 ]" {
+	if arr.String() != "[ 1  2  5  3 ]" {
 		t.Fatal()
 	}
 
 	arr.DeleteAt(1)
 
-	if arr.ToString() != "[ 1  5  3 ]" {
+	if arr.String() != "[ 1  5  3 ]" {
 		t.Fatal()
 	}
 
 	arr.Set(2, 7)
 
-	if arr.ToString() != "[ 1  5  7 ]" {
+	if arr.String() != "[ 1  5  7 ]" {
 		t.Fatal()
 	}
 }

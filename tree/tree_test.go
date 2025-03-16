@@ -91,12 +91,16 @@ func TestBST(t *testing.T) {
 	expected := []int{5, 39, 17, 65, 256, 128, 54}
 	result := b.PostOrder()
 
-	if slices.Compare[[]int, int](expected, result) != 0 {
+	if slices.Compare(expected, result) != 0 {
 		t.Errorf("insert: expected: %v, instead got %v", expected, result)
 	}
 
 	if !b.IsValid() {
 		t.Error("insert: expected newly created BST to be valid")
+	}
+
+	if !slices.IsSorted(b.InOrder()) {
+		t.Error("expected BST in order traversal to present elements in increasing order")
 	}
 
 	b = NewBST(

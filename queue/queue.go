@@ -9,7 +9,7 @@ type Queue[T list.Type] interface {
 	Enqueue(item T)
 	Dequeue() T
 	Peek() T
-	ToString() string
+	String() string
 	Length() int
 }
 

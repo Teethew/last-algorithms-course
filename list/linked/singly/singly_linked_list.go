@@ -105,7 +105,7 @@ func (l *SinglyLinkedList[T]) Length() int {
 	return l.length
 }
 
-func (l *SinglyLinkedList[T]) ToString() (str string) {
+func (l *SinglyLinkedList[T]) String() (str string) {
 	str = "["
 
 	if l.length == 0 {

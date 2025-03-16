@@ -2,25 +2,25 @@ package tree
 
 import "fmt"
 
-type MinHeap struct {
+type MaxHeap struct {
 	capacity int
 	length   int
 	values   []int
 }
 
-func NewMinHeap() *MinHeap {
+func NewMaxHeap() *MaxHeap {
 	initialCapacity := 10
 
 	s := make([]int, initialCapacity)
 
-	return &MinHeap{
+	return &MaxHeap{
 		capacity: initialCapacity,
 		length:   0,
 		values:   s,
 	}
 }
 
-func (h *MinHeap) Insert(n int) {
+func (h *MaxHeap) Insert(n int) {
 	if h.length == h.capacity {
 		h.doubleCapacity()
 	}
@@ -29,9 +29,9 @@ func (h *MinHeap) Insert(n int) {
 	h.length++
 }
 
-func (h *MinHeap) Delete(n int) (err error) {
+func (h *MaxHeap) Delete(n int) (err error) {
 	if h.length == 0 {
-		err = fmt.Errorf("runtime error: (*MinHeap).Delete() called on empty heap")
+		err = fmt.Errorf("runtime error: (*MaxHeap).Delete() called on empty heap")
 		return
 	}
 
@@ -46,9 +46,9 @@ func (h *MinHeap) Delete(n int) (err error) {
 	return
 }
 
-func (h *MinHeap) Pop() (v int, err error) {
+func (h *MaxHeap) Pop() (v int, err error) {
 	if h.length == 0 {
-		return v, fmt.Errorf("runtime error: (*MinHeap).Pop() called on empty heap")
+		return v, fmt.Errorf("runtime error: (*MaxHeap).Pop() called on empty heap")
 	}
 
 	v = h.values[0]
@@ -56,22 +56,22 @@ func (h *MinHeap) Pop() (v int, err error) {
 	return v, h.Delete(0)
 }
 
-func (h *MinHeap) GetMin() (v int) {
+func (h *MaxHeap) GetMax() (v int) {
 	if h.length > 0 {
 		v = h.values[0]
 	}
 	return
 }
 
-func (h *MinHeap) Length() int {
+func (h *MaxHeap) Length() int {
 	return h.length
 }
 
-func (h *MinHeap) ToArray() []int {
+func (h *MaxHeap) ToArray() []int {
 	return h.values[:h.length]
 }
 
-func (h *MinHeap) heapifyUp(i int) {
+func (h *MaxHeap) heapifyUp(i int) {
 	if i == 0 {
 		return
 	}
@@ -80,14 +80,14 @@ func (h *MinHeap) heapifyUp(i int) {
 	parentValue := h.values[parent]
 	value := h.values[i]
 
-	if parentValue > value {
+	if parentValue < value {
 		h.values[i] = parentValue
 		h.values[parent] = value
 		h.heapifyUp(parent)
 	}
 }
 
-func (h *MinHeap) heapifyDown(i int) {
+func (h *MaxHeap) heapifyDown(i int) {
 	if i >= h.length {
 		return
 	}
@@ -103,12 +103,12 @@ func (h *MinHeap) heapifyDown(i int) {
 	rightValue := h.values[right]
 	currentValue := h.values[i]
 
-	if leftValue > rightValue && currentValue > rightValue {
+	if leftValue < rightValue && currentValue < rightValue {
 		h.values[i] = rightValue
 		h.values[right] = currentValue
 		h.heapifyDown(right)
 
-	} else if rightValue > leftValue && currentValue > leftValue {
+	} else if rightValue < leftValue && currentValue < leftValue {
 		h.values[i] = leftValue
 		h.values[left] = currentValue
 		h.heapifyDown(left)
@@ -116,9 +116,21 @@ func (h *MinHeap) heapifyDown(i int) {
 	}
 }
 
-func (h *MinHeap) doubleCapacity() {
+func (h *MaxHeap) doubleCapacity() {
 	s := make([]int, h.capacity*2)
 	copy(s, h.values)
 	h.values = s
 	h.capacity *= 2
+}
+
+func parent(i int) int {
+	return (i - 1) / 2
+}
+
+func left(i int) int {
+	return 2*i + 1
+}
+
+func right(i int) int {
+	return 2*i + 2
 }

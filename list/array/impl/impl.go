@@ -110,7 +110,7 @@ func (a *ArrayList[T]) Set(index int, value T) error {
 	return nil
 }
 
-func (a *ArrayList[T]) ToString() (str string) {
+func (a *ArrayList[T]) String() (str string) {
 	str = "["
 
 	if a.length == 0 {

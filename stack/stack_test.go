@@ -7,13 +7,13 @@ func TestStack(t *testing.T) {
 
 	stack.Push("habiloaldo")
 
-	if stack.ToString() != "[ habiloaldo ]" {
+	if stack.String() != "[ habiloaldo ]" {
 		t.Fatal()
 	}
 
 	stack.Push("jefferson")
 
-	if stack.ToString() != "[ jefferson  habiloaldo ]" {
+	if stack.String() != "[ jefferson  habiloaldo ]" {
 		t.Fatal()
 	}
 
@@ -23,7 +23,7 @@ func TestStack(t *testing.T) {
 
 	_ = stack.Pop()
 
-	if stack.ToString() != "[ habiloaldo ]" {
+	if stack.String() != "[ habiloaldo ]" {
 		t.Fatal()
 	}
 }

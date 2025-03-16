@@ -29,8 +29,8 @@ func (s *LinkedStack[T]) Peek() T {
 	return s.list.Head().Val
 }
 
-func (s *LinkedStack[T]) ToString() string {
-	return s.list.ToString()
+func (s *LinkedStack[T]) String() string {
+	return s.list.String()
 }
 
 func (s *LinkedStack[T]) Length() int {

@@ -9,13 +9,13 @@ func TestQueue(t *testing.T) {
 
 	queue.Enqueue("habiloaldo")
 
-	if queue.ToString() != "[ habiloaldo ]" {
+	if queue.String() != "[ habiloaldo ]" {
 		t.Fatal()
 	}
 
 	queue.Enqueue("jefferson")
 
-	if queue.ToString() != "[ habiloaldo  jefferson ]" {
+	if queue.String() != "[ habiloaldo  jefferson ]" {
 		t.Fatal()
 	}
 
@@ -25,7 +25,7 @@ func TestQueue(t *testing.T) {
 
 	_ = queue.Dequeue()
 
-	if queue.ToString() != "[ jefferson ]" {
+	if queue.String() != "[ jefferson ]" {
 		t.Fatal()
 	}
 }

@@ -9,7 +9,7 @@ type Stack[T list.Type] interface {
 	Push(item T)
 	Pop() T
 	Peek() T
-	ToString() string
+	String() string
 	Length() int
 }
 
